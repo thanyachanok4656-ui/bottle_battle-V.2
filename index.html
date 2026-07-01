@@ -4,17 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bottle Battle to Carbon Goal</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans+Thai:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
   <aside class="sidebar">
     <div class="brand">
       <div class="brand-logo">♻</div>
-      <div><h2>BOTTLE<br>BATTLE</h2><p>TO CARBON GOAL</p></div>
+      <div>
+        <h2>BOTTLE<br>BATTLE</h2>
+        <p>TO CARBON GOAL</p>
+      </div>
     </div>
+
     <nav class="menu">
       <a class="active" href="index.html">🏠 หน้าแรก</a>
       <a href="journey.html">🧭 เส้นทางขวดใส</a>
@@ -30,19 +37,68 @@
       <a href="admin.html">⚙️ ผู้ดูแลระบบ</a>
     </nav>
   </aside>
+
   <main class="main">
-    <section class="hero"><img src="assets/hero-school.png" alt="Bottle Battle Banner"></section>
+    <section class="hero"></section>
+
     <section class="kpi-grid">
-      <article class="kpi-card"><div class="icon">♻️</div><p>ขวดพลาสติกทั้งหมด</p><h3 id="totalWeight">0 kg</h3><span id="totalBottles">0 ขวด</span></article>
-      <article class="kpi-card"><div class="icon">☁️</div><p>ลด CO₂</p><h3 id="co2Saved">0 kgCO₂e</h3><span>คำนวณจากน้ำหนักสะสม</span></article>
-      <article class="kpi-card"><div class="icon">🌳</div><p>เทียบเท่าต้นไม้</p><h3 id="treeCount">0 ต้น</h3><span>ค่าโดยประมาณ</span></article>
-      <article class="kpi-card"><div class="icon">🏆</div><p>ห้องอันดับ 1</p><h3 id="topClass">-</h3><span id="topClassWeight">0 kg</span></article>
+      <article class="kpi-card">
+        <div class="icon">♻️</div>
+        <p>ขวดพลาสติกทั้งหมด</p>
+        <h3 id="totalWeight">0 kg</h3>
+        <span id="totalBottles">0 ขวด</span>
+      </article>
+
+      <article class="kpi-card">
+        <div class="icon">☁️</div>
+        <p>ลด CO₂</p>
+        <h3 id="co2Saved">0 kgCO₂e</h3>
+        <span>คำนวณจากน้ำหนักสะสม</span>
+      </article>
+
+      <article class="kpi-card">
+        <div class="icon">🌳</div>
+        <p>เทียบเท่าต้นไม้</p>
+        <h3 id="treeCount">0 ต้น</h3>
+        <span>ค่าโดยประมาณ</span>
+      </article>
+
+      <article class="kpi-card">
+        <div class="icon">🏆</div>
+        <p>ห้องอันดับ 1</p>
+        <h3 id="topClass">-</h3>
+        <span id="topClassWeight">0 kg</span>
+      </article>
     </section>
+
     <section class="content-grid">
-      <article class="panel"><div class="panel-head"><h2>🏆 Battle Ranking</h2><a href="ranking.html">ดูทั้งหมด</a></div><div class="podium" id="podium"></div></article>
-      <article class="panel"><div class="panel-head"><h2>🧭 Bottle Journey</h2><a href="journey.html">ดูรายละเอียด</a></div><div class="journey"><div><b>1</b><span>Bottle Start</span></div><div><b>2</b><span>Bottle Battle</span></div><div><b>3</b><span>Bottle Bank</span></div><div><b>4</b><span>Bottle Data</span></div><div><b>5</b><span>Bottle Creative</span></div><div><b>6</b><span>Bottle Culture</span></div></div></article>
+      <article class="panel">
+        <div class="panel-head">
+          <h2>🏆 Battle Ranking</h2>
+          <a href="ranking.html">ดูทั้งหมด</a>
+        </div>
+        <div class="podium" id="podium"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <h2>🧭 Bottle Journey</h2>
+          <a href="journey.html">ดูรายละเอียด</a>
+        </div>
+
+        <div class="journey">
+          <div><b>1</b><span>Bottle Start</span></div>
+          <div><b>2</b><span>Bottle Battle</span></div>
+          <div><b>3</b><span>Bottle Bank</span></div>
+          <div><b>4</b><span>Bottle Data</span></div>
+          <div><b>5</b><span>Bottle Creative</span></div>
+          <div><b>6</b><span>Bottle Culture</span></div>
+        </div>
+      </article>
     </section>
   </main>
-  <script src="js/api.js"></script><script src="js/app.js"></script>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
