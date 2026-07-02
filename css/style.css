@@ -632,3 +632,108 @@ th{
   font-weight:800 !important;
   color:#063b24 !important;
 }
+.ranking-card{
+  background:#fff;
+  border:5px solid #fff;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.ranking-scene{
+  position:relative;
+  height:520px;
+  background-image:url("../assets/ranking-bg.png");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+.rank-label{
+  position:absolute;
+  width:160px;
+  text-align:center;
+  background:rgba(255,255,255,.88);
+  border-radius:18px;
+  padding:10px;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+  font-weight:800;
+}
+
+.rank-label h2{
+  margin:0;
+  font-size:32px;
+  color:#064226;
+}
+
+.rank-label b{
+  display:block;
+  font-size:22px;
+  color:#064226;
+}
+
+.rank-label span{
+  display:block;
+  color:#08783d;
+  font-size:18px;
+}
+
+.rank-label.first{
+  left:50%;
+  bottom:42px;
+  transform:translateX(-50%);
+}
+
+.rank-label.second{
+  left:15%;
+  bottom:58px;
+}
+
+.rank-label.third{
+  right:15%;
+  bottom:58px;
+}
+
+.ranking-table-box{
+  padding:18px 24px;
+  background:#f8fff4;
+}
+
+.ranking-table-box h3{
+  margin:0 0 12px;
+}
+
+.ranking-table-box table{
+  width:100%;
+}
+
+.ranking-table-box td{
+  padding:10px;
+  border-bottom:1px solid #dcefdc;
+  font-weight:800;
+}
+
+.school-goal{
+  padding:18px 24px 24px;
+  background:#ffffff;
+}
+
+.school-goal b{
+  display:block;
+  margin-bottom:6px;
+}
+
+.goal-bar{
+  height:18px;
+  background:#dcefdc;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:8px;
+}
+
+.goal-bar div{
+  height:100%;
+  width:0%;
+  background:#1fb24b;
+  border-radius:999px;
+}
