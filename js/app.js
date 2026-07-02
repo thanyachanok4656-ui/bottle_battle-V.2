@@ -62,18 +62,46 @@ async function loadRanking() {
   const res = await api("getSummary");
   if (!res.success) return;
 
-  renderPodium(res.data.ranking);
+  const ranking = res.data.ranking || [];
 
-  document.querySelector("#rankingTable").innerHTML = res.data.ranking.map((r, i) => `
+  const rank1 = ranking[0];
+  const rank2 = ranking[1];
+  const rank3 = ranking[2];
+
+  if (rank1) {
+    document.querySelector("#rank1").innerHTML =
+      `<h2>1</h2><b>${rank1.className}</b><span>${fmt(rank1.weightKg)} kg</span>`;
+  }
+
+  if (rank2) {
+    document.querySelector("#rank2").innerHTML =
+      `<h2>2</h2><b>${rank2.className}</b><span>${fmt(rank2.weightKg)} kg</span>`;
+  }
+
+  if (rank3) {
+    document.querySelector("#rank3").innerHTML =
+      `<h2>3</h2><b>${rank3.className}</b><span>${fmt(rank3.weightKg)} kg</span>`;
+  }
+
+  const rows = ranking.slice(3, 10);
+
+  document.querySelector("#rankingTable").innerHTML = rows.map((r, i) => `
     <tr>
-      <td>${i + 1}</td>
+      <td>${i + 4}</td>
       <td>${r.className}</td>
       <td>${fmt(r.weightKg)} kg</td>
-      <td>${fmt(r.weightKg * CONFIG.BOTTLE_PER_KG)} ขวด</td>
     </tr>
   `).join("");
-}
 
+  const goal = 1600;
+  const total = res.data.totalWeight || 0;
+  const percent = Math.min(100, (total / goal) * 100);
+
+  document.querySelector("#goalText").textContent =
+    `เก็บแล้ว ${fmt(total)} kg จากเป้าหมาย ${fmt(goal)} kg`;
+
+  document.querySelector("#goalFill").style.width = percent + "%";
+}
 async function initSubmit() {
   const classrooms = await api("getClassrooms");
 
