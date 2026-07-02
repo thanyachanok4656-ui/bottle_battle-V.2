@@ -546,3 +546,33 @@ th{
     opacity:1;
   }
 }
+.podium{
+  min-height:420px !important;
+  align-items:flex-end !important;
+  padding:70px 16px 35px !important;
+}
+
+.podium-item{
+  padding:18px 14px 28px !important;
+  overflow:visible !important;
+}
+
+.podium-item.rank1{
+  height:250px !important;
+}
+
+.podium-item.rank2{
+  height:210px !important;
+}
+
+.podium-item.rank3{
+  height:190px !important;
+}
+
+.podium-item p{
+  margin-top:8px !important;
+  display:block !important;
+  color:#063b24 !important;
+  font-size:17px !important;
+  line-height:1.2 !important;
+}
