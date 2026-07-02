@@ -1,1 +1,38 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ประวัติข้อมูล | Bottle Battle</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playpen+Sans+Thai:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"></head><body><aside class="sidebar"><div class="brand"><div class="brand-logo">♻</div><div><h2>BOTTLE<br>BATTLE</h2><p>TO CARBON GOAL</p></div></div><nav class="menu"><a href="index.html">🏠 หน้าแรก</a><a href="journey.html">🧭 เส้นทางขวดใส</a><a href="ranking.html">🏆 อันดับห้องเรียน</a><a href="dashboard.html">📊 ภาพรวมรายวัน</a><a href="carbon.html">🌱 วิเคราะห์คาร์บอน</a><a href="map.html">📍 แผนที่จุดรับขวด</a><a href="gallery.html">🖼 คลังมีกิจกรรม</a><a href="innovation.html">💡 นวัตกรรม</a><a href="report.html">📄 หลักฐานและรายงาน</a><a href="submit.html">✍️ บันทึกน้ำหนักขวด</a><a href="history.html">📚 ประวัติข้อมูล</a><a href="admin.html">⚙️ ผู้ดูแลระบบ</a></nav></aside><main class="main"><header class="page-title"><h1>📚 ประวัติข้อมูล</h1><p>ค้นหารายการบันทึกย้อนหลัง</p></header><section class="panel form-row"><input type="date" id="historyDate"><input id="historyClass" placeholder="ค้นหาห้อง"><button id="historyBtn">ค้นหา</button></section><section class="panel"><table><thead><tr><th>วันที่</th><th>ห้อง</th><th>น้ำหนัก</th><th>ผู้บันทึก</th></tr></thead><tbody id="historyTable"></tbody></table></section></main><script src="js/api.js"></script><script src="js/app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ประวัติการบันทึก</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="menu">
+    <a href="index.html">หน้าแรก</a>
+    <a href="ranking.html">Ranking</a>
+    <a href="submit.html">บันทึกน้ำหนัก</a>
+    <a href="history.html">ประวัติ</a>
+  </nav>
+
+  <main class="page">
+    <h1>📋 ประวัติการบันทึก</h1>
+
+    <section class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>วันที่/เวลา</th>
+            <th>ห้อง</th>
+            <th>น้ำหนัก</th>
+            <th>ผู้บันทึก</th>
+          </tr>
+        </thead>
+        <tbody id="historyTable"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="api.js"></script>
+  <script src="history.js"></script>
+</body>
+</html>
