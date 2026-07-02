@@ -1,25 +1,40 @@
-<main class="main">
-  <header class="page-title ranking-title">
-    <h1>🏆 อันดับห้องเรียน</h1>
-    <p>ตารางคะแนนสะสมของแต่ละห้อง</p>
-  </header>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>อันดับห้องเรียน</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <section class="ranking-card">
-    <div class="ranking-scene">
-      <img src="assets/ranking-bg.png" class="ranking-image" alt="Ranking">
+<section class="ranking-page">
 
-      <div class="rank-badge rank-first" id="rank1"></div>
-      <div class="rank-badge rank-second" id="rank2"></div>
-      <div class="rank-badge rank-third" id="rank3"></div>
-    </div>
+  <h1>🏆 อันดับห้องเรียน</h1>
 
-    <div class="ranking-table-box">
-      <h3>อันดับ 4 - 10</h3>
-      <table>
-        <tbody id="rankingTable"></tbody>
-      </table>
-    </div>
-  </section>
-</main>
+  <div class="podium-box">
+    <img src="assets/ranking-bg.png" class="podium-bg">
 
- 
+    <div id="rank1" class="rank rank1"></div>
+    <div id="rank2" class="rank rank2"></div>
+    <div id="rank3" class="rank rank3"></div>
+  </div>
+
+  <div class="ranking-list">
+    <h2>อันดับอื่น ๆ</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>อันดับ</th>
+          <th>ห้อง</th>
+          <th>น้ำหนักรวม</th>
+        </tr>
+      </thead>
+      <tbody id="rankingTable"></tbody>
+    </table>
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
