@@ -1,1 +1,29 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>อันดับห้องเรียน | Bottle Battle</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playpen+Sans+Thai:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"></head><body><aside class="sidebar"><div class="brand"><div class="brand-logo">♻</div><div><h2>BOTTLE<br>BATTLE</h2><p>TO CARBON GOAL</p></div></div><nav class="menu"><a href="index.html">🏠 หน้าแรก</a><a href="journey.html">🧭 เส้นทางขวดใส</a><a href="ranking.html">🏆 อันดับห้องเรียน</a><a href="dashboard.html">📊 ภาพรวมรายวัน</a><a href="carbon.html">🌱 วิเคราะห์คาร์บอน</a><a href="map.html">📍 แผนที่จุดรับขวด</a><a href="gallery.html">🖼 คลังมีกิจกรรม</a><a href="innovation.html">💡 นวัตกรรม</a><a href="report.html">📄 หลักฐานและรายงาน</a><a href="submit.html">✍️ บันทึกน้ำหนักขวด</a><a href="history.html">📚 ประวัติข้อมูล</a><a href="admin.html">⚙️ ผู้ดูแลระบบ</a></nav></aside><main class="main"><header class="page-title"><h1>🏆 อันดับห้องเรียน</h1><p>ตารางคะแนนสะสมของแต่ละห้อง</p></header><section class="panel"><div class="podium" id="podium"></div></section><section class="panel"><h2>อันดับทั้งหมด</h2><table><thead><tr><th>อันดับ</th><th>ห้อง</th><th>น้ำหนัก</th><th>ขวดประมาณ</th></tr></thead><tbody id="rankingTable"></tbody></table></section></main><script src="js/api.js"></script><script src="js/app.js"></script></body></html>
+<main class="main">
+  <header class="page-title ranking-title">
+    <h1>🏆 อันดับห้องเรียน</h1>
+    <p>ตารางคะแนนสะสมของแต่ละห้อง</p>
+  </header>
+
+  <section class="ranking-card">
+    <div class="ranking-scene">
+      <div class="rank-label second" id="rank2"></div>
+      <div class="rank-label first" id="rank1"></div>
+      <div class="rank-label third" id="rank3"></div>
+    </div>
+
+    <div class="ranking-table-box">
+      <h3>อันดับ 4 - 10</h3>
+      <table>
+        <tbody id="rankingTable"></tbody>
+      </table>
+    </div>
+
+    <div class="school-goal">
+      <b>🎯 เป้าหมายทั้งโรงเรียน</b>
+      <span id="goalText">กำลังโหลด...</span>
+      <div class="goal-bar">
+        <div id="goalFill"></div>
+      </div>
+    </div>
+  </section>
+</main>
