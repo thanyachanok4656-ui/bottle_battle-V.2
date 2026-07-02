@@ -737,3 +737,37 @@ th{
   background:#1fb24b;
   border-radius:999px;
 }
+.ranking-scene{
+    position:relative;
+}
+
+.ranking-image{
+    width:100%;
+    display:block;
+    border-radius:24px;
+}
+
+.rank{
+    position:absolute;
+    text-align:center;
+    background:#fff;
+    padding:10px 14px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.first{
+    left:50%;
+    bottom:7%;
+    transform:translateX(-50%);
+}
+
+.second{
+    left:17%;
+    bottom:7%;
+}
+
+.third{
+    right:17%;
+    bottom:7%;
+}
