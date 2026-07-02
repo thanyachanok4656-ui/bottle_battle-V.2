@@ -1,0 +1,53 @@
+document.addEventListener("DOMContentLoaded", () => {
+  loadRanking();
+  setInterval(loadRanking, 10000);
+});
+
+async function loadRanking() {
+  try {
+    const res = await api("getRanking");
+    const data = res.data || [];
+
+    renderRanking(data);
+  } catch (err) {
+    console.error("Ranking Error:", err);
+  }
+}
+
+function renderRanking(data) {
+  data.sort((a, b) => Number(b.totalWeight) - Number(a.totalWeight));
+
+  renderTopRank("top1", data[0], 1);
+  renderTopRank("top2", data[1], 2);
+  renderTopRank("top3", data[2], 3);
+  renderRankingTable(data);
+}
+
+function renderTopRank(id, item, rankNo) {
+  const box = document.getElementById(id);
+  if (!box) return;
+
+  if (!item) {
+    box.innerHTML = "";
+    return;
+  }
+
+  box.innerHTML = `
+    <div class="rank-no">${rankNo}</div>
+    <div class="rank-room">${item.className}</div>
+    <div class="rank-weight">${Number(item.totalWeight).toFixed(2)} kg</div>
+  `;
+}
+
+function renderRankingTable(data) {
+  const tbody = document.getElementById("rankingTable");
+  if (!tbody) return;
+
+  tbody.innerHTML = data.map((item, index) => `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${item.className}</td>
+      <td>${Number(item.totalWeight).toFixed(2)} kg</td>
+    </tr>
+  `).join("");
+}
