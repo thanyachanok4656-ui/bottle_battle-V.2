@@ -1,184 +1,62 @@
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", loadRankingPage);
 
 function fmt(n) {
-  return Number(n || 0).toLocaleString("th-TH", {
-    maximumFractionDigits: 2
-  });
+  return Number(n || 0).toLocaleString("th-TH", { maximumFractionDigits: 2 });
 }
 
-async function init() {
-  const current = location.pathname.split("/").pop() || "index.html";
-
-  document.querySelectorAll(".menu a").forEach(a => {
-    if (a.getAttribute("href") === current) {
-      a.classList.add("active");
-    }
-  });
-
-  if (document.querySelector("#totalWeight")) loadSummary();
-  if (document.querySelector("#rankingTable")) loadRanking();
-  if (document.querySelector("#submitForm")) initSubmit();
-  if (document.querySelector("#dailyBtn")) initDaily();
-  if (document.querySelector("#historyBtn")) initHistory();
-  if (document.querySelector("#carbonTotal")) loadCarbon();
-}
-
-async function loadSummary() {
+async function loadRankingPage() {
+  highlightActiveMenu();
   const res = await api("getSummary");
-  if (!res.success) return;
-
-  const d = res.data;
-
-  document.querySelector("#totalWeight").textContent = fmt(d.totalWeight) + " kg";
-  document.querySelector("#totalBottles").textContent = fmt(d.totalBottles) + " ขวด";
-  document.querySelector("#co2Saved").textContent = fmt(d.co2Saved) + " kgCO₂e";
-  document.querySelector("#treeCount").textContent = fmt(d.treeCount) + " ต้น";
-  document.querySelector("#topClass").textContent = d.topClass.className;
-  document.querySelector("#topClassWeight").textContent = fmt(d.topClass.weightKg) + " kg";
-
-  renderPodium(d.ranking);
-}
-
-function renderPodium(ranking) {
-  const el = document.querySelector("#podium");
-  if (!el) return;
-
-  const top = ranking.slice(0, 3);
-  const faces = ["🐼", "🐰", "🐧"];
-
-  el.innerHTML = top.map((row, index) => {
-    return `
-      <div class="podium-item rank${index + 1}">
-        <div class="face">${faces[index]}</div>
-        <h2>${index + 1}</h2>
-        <b>${row.className}</b>
-        <p>${fmt(row.weightKg)} kg</p>
-      </div>
-    `;
-  }).join("");
-}
-
-async function loadRanking() {
-  const res = await api("getSummary");
-  if (!res.success) return;
-
+  if (!res.success) {
+    alert("โหลดข้อมูล Ranking ไม่สำเร็จ: " + (res.message || ""));
+    return;
+  }
   const ranking = res.data.ranking || [];
+  showTopRank("#rank1", ranking[0], 1);
+  showTopRank("#rank2", ranking[1], 2);
+  showTopRank("#rank3", ranking[2], 3);
+  renderRankingTable(ranking.slice(3, 10));
+  renderGoal(res.data.totalWeight || 0);
+}
 
-  const showRank = (selector, item, rank) => {
-    if (!item) return;
-    document.querySelector(selector).innerHTML = `
-      <h2>${rank}</h2>
-      <b>${item.className}</b>
-      <span>${fmt(item.weightKg)} kg</span>
-    `;
-  };
+function highlightActiveMenu() {
+  const current = location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".menu a").forEach(a => {
+    if (a.getAttribute("href") === current) a.classList.add("active");
+  });
+}
 
-  showRank("#rank1", ranking[0], 1);
-  showRank("#rank2", ranking[1], 2);
-  showRank("#rank3", ranking[2], 3);
+function showTopRank(selector, item, rank) {
+  const el = document.querySelector(selector);
+  if (!el) return;
+  if (!item) {
+    el.innerHTML = `<h2>${rank}</h2><b>-</b><span>0 kg</span>`;
+    return;
+  }
+  el.innerHTML = `<h2>${rank}</h2><b>${item.className}</b><span>${fmt(item.weightKg)} kg</span>`;
+}
 
-  const rows = ranking.slice(3, 10);
-
-  document.querySelector("#rankingTable").innerHTML = rows.map((r, i) => `
+function renderRankingTable(rows) {
+  const tbody = document.querySelector("#rankingTable");
+  if (!tbody) return;
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="4">ยังไม่มีข้อมูลอันดับ 4 - 10</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows.map((item, index) => `
     <tr>
-      <td>${i + 4}</td>
-      <td>${r.className}</td>
-      <td>${fmt(r.weightKg)} kg</td>
+      <td>${index + 4}</td>
+      <td>${item.className}</td>
+      <td>${fmt(item.weightKg)} kg</td>
+      <td>${fmt(item.weightKg * CONFIG.BOTTLE_PER_KG)} ขวด</td>
     </tr>
   `).join("");
 }
 
+function renderGoal(totalWeight) {
   const goal = 1600;
-  const total = res.data.totalWeight || 0;
-  const percent = Math.min(100, (total / goal) * 100);
-
+  const percent = Math.min(100, (totalWeight / goal) * 100);
   document.querySelector("#goalText").textContent =
-    `เก็บแล้ว ${fmt(total)} kg จากเป้าหมาย ${fmt(goal)} kg`;
-
+    `เก็บแล้ว ${fmt(totalWeight)} kg จากเป้าหมาย ${fmt(goal)} kg`;
   document.querySelector("#goalFill").style.width = percent + "%";
-}
-async function initSubmit() {
-  const classrooms = await api("getClassrooms");
-
-  document.querySelector("#classSelect").innerHTML =
-    `<option value="">เลือกห้องเรียน</option>` +
-    classrooms.data.map(c => `<option>${c.className}</option>`).join("");
-
-  document.querySelector("[name=date]").value = new Date().toISOString().slice(0, 10);
-
-  document.querySelector("#submitForm").addEventListener("submit", async e => {
-    e.preventDefault();
-
-    const payload = Object.fromEntries(new FormData(e.target).entries());
-    payload.weightKg = Number(payload.weightKg);
-
-    const res = await api("saveCollection", payload);
-
-    document.querySelector("#submitMsg").textContent =
-      res.success ? "✅ บันทึกข้อมูลเรียบร้อย" : "❌ " + res.message;
-
-    if (res.success) e.target.reset();
-  });
-}
-
-function initDaily() {
-  document.querySelector("#dailyDate").value = new Date().toISOString().slice(0, 10);
-  document.querySelector("#dailyBtn").addEventListener("click", loadDaily);
-  loadDaily();
-}
-
-async function loadDaily() {
-  const res = await api("getDaily", {
-    date: document.querySelector("#dailyDate").value
-  });
-
-  if (!res.success) return;
-
-  const d = res.data;
-
-  document.querySelector("#todayWeight").textContent = fmt(d.totalWeight) + " kg";
-  document.querySelector("#todayCo2").textContent = fmt(d.co2Saved) + " kgCO₂e";
-  document.querySelector("#todayTop").textContent = d.topClass;
-  document.querySelector("#todayCount").textContent = d.items.length;
-
-  document.querySelector("#dailyTable").innerHTML = d.items.map(x => `
-    <tr>
-      <td>${x.time}</td>
-      <td>${x.className}</td>
-      <td>${fmt(x.weightKg)} kg</td>
-      <td>${x.recorder}</td>
-    </tr>
-  `).join("");
-}
-
-function initHistory() {
-  document.querySelector("#historyBtn").addEventListener("click", loadHistory);
-  loadHistory();
-}
-
-async function loadHistory() {
-  const res = await api("getHistory", {
-    date: document.querySelector("#historyDate")?.value,
-    className: document.querySelector("#historyClass")?.value
-  });
-
-  if (!res.success) return;
-
-  document.querySelector("#historyTable").innerHTML = res.data.map(x => `
-    <tr>
-      <td>${x.date}</td>
-      <td>${x.className}</td>
-      <td>${fmt(x.weightKg)} kg</td>
-      <td>${x.recorder}</td>
-    </tr>
-  `).join("");
-}
-
-async function loadCarbon() {
-  const res = await api("getSummary");
-  const d = res.data;
-
-  document.querySelector("#carbonTotal").textContent = fmt(d.co2Saved);
-  document.querySelector("#carbonText").textContent =
-    `น้ำหนักขวดสะสม ${fmt(d.totalWeight)} kg ลดคาร์บอนประมาณ ${fmt(d.co2Saved)} kgCO₂e`;
 }
