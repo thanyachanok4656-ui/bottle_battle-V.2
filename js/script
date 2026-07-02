@@ -1,0 +1,133 @@
+
+
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyERc7b8BhiG_SC4aEcZoTIdcxfEP6nHCULsa40UDwDOrlRqYldksnsKuUExIY1OF4/execexec ตรงนี้";
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  loadRanking();
+
+  setInterval(loadRanking, 10000);
+
+});
+
+
+
+async function api(action, payload = {}) {
+
+  const url =
+
+    WEB_APP_URL +
+
+    "?action=" +
+
+    encodeURIComponent(action) +
+
+    "&payload=" +
+
+    encodeURIComponent(JSON.stringify(payload));
+
+
+
+  const res = await fetch(url);
+
+  return await res.json();
+
+}
+
+
+
+async function loadRanking() {
+
+  try {
+
+    const res = await api("getRanking");
+
+
+
+    if (!res.success) {
+
+      throw new Error(res.message || "โหลดข้อมูลไม่สำเร็จ");
+
+    }
+
+
+
+    renderRanking(res.data || []);
+
+  } catch (err) {
+
+    console.error(err);
+
+  }
+
+}
+
+
+
+function renderRanking(data) {
+
+  data.sort((a, b) => Number(b.totalWeight) - Number(a.totalWeight));
+
+
+
+  const topIds = ["top1", "top2", "top3"];
+
+
+
+  topIds.forEach((id, index) => {
+
+    const box = document.getElementById(id);
+
+    const item = data[index];
+
+
+
+    if (!box) return;
+
+
+
+    if (!item) {
+
+      box.innerHTML = "";
+
+      return;
+
+    }
+
+
+
+    box.innerHTML = `
+
+      <div class="rank-no">${index + 1}</div>
+
+      <div class="rank-room">${item.className}</div>
+
+      <div class="rank-weight">${Number(item.totalWeight).toFixed(2)} kg</div>
+
+    `;
+
+  });
+
+
+
+  const tbody = document.getElementById("rankingTable");
+
+
+
+  tbody.innerHTML = data.map((item, index) => `
+
+    <tr>
+
+      <td>${index + 1}</td>
+
+      <td>${item.className}</td>
+
+      <td>${Number(item.totalWeight).toFixed(2)} kg</td>
+
+    </tr>
+
+  `).join("");
+
+}
