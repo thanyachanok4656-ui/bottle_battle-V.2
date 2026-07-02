@@ -849,3 +849,71 @@ th{
 .ranking-table-box table{
   width:100%;
 }
+.ranking-title{
+  background:linear-gradient(120deg,#b9f2ff,#efffd5);
+  border:5px solid #fff;
+  border-radius:28px;
+  padding:24px 28px;
+  margin-bottom:16px;
+}
+.ranking-title h1{margin:0;font-size:34px;color:#073b24}
+.ranking-title p{margin:8px 0 0;font-weight:800}
+.ranking-card{
+  width:100%;
+  max-width:1120px;
+  background:#fff;
+  border:5px solid #fff;
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:0 14px 35px rgba(0,0,0,.16);
+}
+.ranking-scene{position:relative;width:100%;background:#043f36;overflow:hidden}
+.ranking-image{display:block;width:100%;height:auto}
+.rank-badge{
+  position:absolute;
+  width:150px;
+  text-align:center;
+  background:rgba(255,255,255,.92);
+  border:3px solid rgba(255,255,255,.95);
+  border-radius:18px;
+  padding:10px 12px;
+  box-shadow:0 10px 24px rgba(0,0,0,.25);
+  color:#063b24;
+  font-weight:800;
+  backdrop-filter:blur(8px);
+  animation:rankPop .65s ease both;
+}
+.rank-badge h2{margin:0;font-size:32px;line-height:1}
+.rank-badge b{display:block;margin-top:4px;font-size:22px}
+.rank-badge span{display:block;margin-top:2px;font-size:16px;color:#07823f}
+.rank-first{left:50%;bottom:5%;transform:translateX(-50%)}
+.rank-second{left:13%;bottom:7%}
+.rank-third{right:13%;bottom:7%}
+.ranking-bottom{background:#f8fff4;padding:16px}
+.ranking-table-box{background:#fff;border-radius:22px;padding:16px;box-shadow:0 8px 18px rgba(0,0,0,.06)}
+.ranking-table-box h3{margin:0 0 12px;color:#073b24}
+.ranking-table-box table{width:100%;border-collapse:collapse}
+.ranking-table-box th,.ranking-table-box td{padding:10px 12px;border-bottom:1px solid #dcefdc;text-align:left;font-weight:800}
+.ranking-table-box th{color:#08763a;font-size:14px}
+.school-goal{margin-top:14px;display:flex;gap:14px;align-items:center;background:linear-gradient(120deg,#eaffdf,#fff);border-radius:22px;padding:16px;box-shadow:0 8px 18px rgba(0,0,0,.06)}
+.goal-icon{width:64px;height:64px;display:grid;place-items:center;border-radius:50%;background:#fff;font-size:38px;box-shadow:0 8px 18px rgba(0,0,0,.12);flex:0 0 auto}
+.goal-content{width:100%}
+.school-goal b{font-size:18px}
+.school-goal p{margin:4px 0 8px;font-weight:800;color:#386247}
+.goal-bar{width:100%;height:18px;background:#dbeed8;border-radius:999px;overflow:hidden}
+.goal-bar span{display:block;height:100%;width:0%;background:linear-gradient(90deg,#13a64b,#7de35c);border-radius:999px;transition:width .8s ease}
+@keyframes rankPop{from{opacity:0;transform:translateY(30px) scale(.9)}to{opacity:1}}
+@media(max-width:900px){
+  .rank-badge{width:110px;padding:7px 8px}
+  .rank-badge h2{font-size:24px}
+  .rank-badge b{font-size:16px}
+  .rank-badge span{font-size:13px}
+  .rank-second{left:8%}
+  .rank-third{right:8%}
+}
+@media(max-width:600px){
+  .ranking-image{width:140%;max-width:none;margin-left:-20%}
+  .rank-badge{width:96px}
+  .rank-first{bottom:4%}
+  .rank-second,.rank-third{bottom:5%}
+}
