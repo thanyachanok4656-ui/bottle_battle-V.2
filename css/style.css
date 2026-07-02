@@ -463,3 +463,86 @@ th{
     grid-column:auto;
   }
 }
+.podium{
+  min-height:360px;
+  padding:28px 16px;
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.4), transparent 25%),
+    linear-gradient(135deg,#005d4c,#053b56);
+  position:relative;
+  overflow:hidden;
+}
+
+.podium::before{
+  content:"🎉 ✨ ⭐ 🎊 ✨";
+  position:absolute;
+  top:18px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-size:30px;
+  letter-spacing:18px;
+}
+
+.podium-item{
+  width:165px;
+  border:0;
+  color:#063b24;
+  box-shadow:0 14px 25px rgba(0,0,0,.25);
+  animation:popUp .7s ease both;
+}
+
+.podium-item.rank1{
+  height:230px;
+  background:linear-gradient(#ffe98a,#f6bd16);
+  order:2;
+}
+
+.podium-item.rank2{
+  height:190px;
+  background:linear-gradient(#ffffff,#cfd8dc);
+  order:1;
+}
+
+.podium-item.rank3{
+  height:170px;
+  background:linear-gradient(#ffd1a1,#c9782e);
+  order:3;
+}
+
+.podium-item.rank1::before{
+  content:"👑";
+  display:block;
+  font-size:34px;
+  margin-bottom:4px;
+}
+
+.podium-item .face{
+  font-size:58px;
+}
+
+.podium-item h2{
+  font-size:34px;
+  margin:4px 0;
+}
+
+.podium-item b{
+  font-size:22px;
+}
+
+.podium-item p{
+  font-size:18px;
+  font-weight:800;
+}
+
+@keyframes popUp{
+  from{
+    transform:translateY(40px) scale(.9);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
+}
