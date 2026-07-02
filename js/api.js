@@ -1,5 +1,5 @@
 const CONFIG = {
-  API_URL: "PASTE_APPS_SCRIPT_EXEC_URL_HERE",
+  API_URL: "https://script.google.com/macros/s/AKfycbyERc7b8BhiG_SC4aEcZoTIdcxfEP6nHCULsa40UDwDOrlRqYldksnsKuUExIY1OF4/exec",
   BOTTLE_PER_KG: 50,
   CO2_PER_KG: 3.96,
   TREE_CO2_PER_YEAR: 22
