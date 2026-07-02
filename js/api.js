@@ -53,7 +53,7 @@ function mockApi(action, payload) {
         totalWeight,
         totalBottles: Math.round(totalWeight * CONFIG.BOTTLE_PER_KG),
         co2Saved: totalWeight * CONFIG.CO2_PER_KG,
-        treeCount: Math.round((totalWeight * CONFIG.CO2_PER_YEAR) / CONFIG.TREE_CO2_PER_YEAR),
+        treeCount: Math.round((totalWeight * CONFIG.CO2_PER_KG) / CONFIG.TREE_CO2_PER_YEAR),
         topClass: ranking[0]
       }
     });
