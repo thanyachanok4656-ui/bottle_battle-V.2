@@ -4,7 +4,7 @@
 
 body{
   margin:0;
-  font-family:"Kanit",system-ui,sans-serif;
+  font-family:"Prompt",system-ui,sans-serif;
   background:#dff6d9;
   color:#073b24;
   display:flex;
@@ -14,7 +14,7 @@ body{
 /* ===== Sidebar ===== */
 .sidebar{
   width:250px;
-  background:linear-gradient(180deg,#053b27,#08713d);
+  background: linear-gradient(#d4fc79, #96e6a1);
   color:#fff;
   padding:18px;
   position:fixed;
