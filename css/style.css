@@ -576,3 +576,59 @@ th{
   font-size:17px !important;
   line-height:1.2 !important;
 }
+.podium{
+  min-height:390px !important;
+  padding:230px 22px 28px !important;
+  border-radius:28px !important;
+  overflow:hidden !important;
+  position:relative !important;
+
+  background-image:url("../assets/ranking-bg.png") !important;
+  background-size:cover !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+
+  display:grid !important;
+  grid-template-columns:1fr 1fr 1fr !important;
+  align-items:end !important;
+  gap:18px !important;
+}
+
+.podium::before{
+  display:none !important;
+}
+
+.podium-item{
+  width:100% !important;
+  height:auto !important;
+  min-height:92px !important;
+  padding:10px 12px !important;
+  border-radius:18px !important;
+  background:rgba(255,255,255,.86) !important;
+  backdrop-filter:blur(8px);
+  text-align:center !important;
+  box-shadow:0 10px 22px rgba(0,0,0,.22) !important;
+}
+
+.podium-item .face{
+  display:none !important;
+}
+
+.podium-item h2{
+  margin:0 !important;
+  font-size:28px !important;
+  color:#063b24 !important;
+}
+
+.podium-item b{
+  display:block !important;
+  font-size:20px !important;
+  color:#063b24 !important;
+}
+
+.podium-item p{
+  margin:4px 0 0 !important;
+  font-size:16px !important;
+  font-weight:800 !important;
+  color:#063b24 !important;
+}
