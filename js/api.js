@@ -6,7 +6,7 @@ const CONFIG = {
 };
 
 async function api(action, payload = {}) {
-  if (CONFIG.API_URL.includes("PASTE_")) {
+  if (!CONFIG.API_URL || CONFIG.API_URL.includes("PASTE_")) {
     return mockApi(action, payload);
   }
 
@@ -21,10 +21,10 @@ async function api(action, payload = {}) {
 
 function mockApi(action, payload) {
   const ranking = [
-    { className: "ม.4/3", weightKg: 85.6 },
-    { className: "ม.5/2", weightKg: 80.2 },
-    { className: "ม.6/1", weightKg: 75.3 },
-    { className: "ม.3/2", weightKg: 61.6 }
+    { className: "ม.4/3", totalWeight: 85.6 },
+    { className: "ม.5/2", totalWeight: 80.2 },
+    { className: "ม.6/1", totalWeight: 75.3 },
+    { className: "ม.3/2", totalWeight: 61.6 }
   ];
 
   const classrooms = [
@@ -36,7 +36,14 @@ function mockApi(action, payload) {
     "ม.6/1","ม.6/2","ม.6/3","ม.6/4","ม.6/5","ม.6/6"
   ];
 
-  const totalWeight = ranking.reduce((s, r) => s + r.weightKg, 0);
+  const totalWeight = ranking.reduce((s, r) => s + r.totalWeight, 0);
+
+  if (action === "getRanking") {
+    return Promise.resolve({
+      success: true,
+      data: ranking
+    });
+  }
 
   if (action === "getSummary") {
     return Promise.resolve({
@@ -46,7 +53,7 @@ function mockApi(action, payload) {
         totalWeight,
         totalBottles: Math.round(totalWeight * CONFIG.BOTTLE_PER_KG),
         co2Saved: totalWeight * CONFIG.CO2_PER_KG,
-        treeCount: Math.round((totalWeight * CONFIG.CO2_PER_KG) / CONFIG.TREE_CO2_PER_YEAR),
+        treeCount: Math.round((totalWeight * CONFIG.CO2_PER_YEAR) / CONFIG.TREE_CO2_PER_YEAR),
         topClass: ranking[0]
       }
     });
