@@ -64,24 +64,18 @@ async function loadRanking() {
 
   const ranking = res.data.ranking || [];
 
-  const rank1 = ranking[0];
-  const rank2 = ranking[1];
-  const rank3 = ranking[2];
+  const showRank = (selector, item, rank) => {
+    if (!item) return;
+    document.querySelector(selector).innerHTML = `
+      <h2>${rank}</h2>
+      <b>${item.className}</b>
+      <span>${fmt(item.weightKg)} kg</span>
+    `;
+  };
 
-  if (rank1) {
-    document.querySelector("#rank1").innerHTML =
-      `<h2>1</h2><b>${rank1.className}</b><span>${fmt(rank1.weightKg)} kg</span>`;
-  }
-
-  if (rank2) {
-    document.querySelector("#rank2").innerHTML =
-      `<h2>2</h2><b>${rank2.className}</b><span>${fmt(rank2.weightKg)} kg</span>`;
-  }
-
-  if (rank3) {
-    document.querySelector("#rank3").innerHTML =
-      `<h2>3</h2><b>${rank3.className}</b><span>${fmt(rank3.weightKg)} kg</span>`;
-  }
+  showRank("#rank1", ranking[0], 1);
+  showRank("#rank2", ranking[1], 2);
+  showRank("#rank3", ranking[2], 3);
 
   const rows = ranking.slice(3, 10);
 
@@ -92,6 +86,7 @@ async function loadRanking() {
       <td>${fmt(r.weightKg)} kg</td>
     </tr>
   `).join("");
+}
 
   const goal = 1600;
   const total = res.data.totalWeight || 0;
